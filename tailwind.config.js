@@ -752,7 +752,7 @@ export default {
                 'serif',
             ],
             body: ['Roboto', 'sans-serif'],
-            awesome: ['FontAwesome'],
+            awesome: [ 'FontAwesome' ],
         },
         fontSize: ({ theme }) => ({
             ...theme('spacing'),

@@ -1,23 +1,27 @@
 <script setup>
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import { Link } from '@inertiajs/vue3';
+    import { Link } from '@inertiajs/vue3';
+    import { useDark} from '@vueuse/core';
 
-const year = new Date().getFullYear();
+    const year = new Date().getFullYear();
+
+    const isDark = useDark();
+
+
 </script>
 
 <template>
-    <div class="container sticky top-0 z-sticky">
+    <div class="container sticky top-0 z-sticky ">
         <div class="flex flex-wrap -mx-3">
             <div class="w-full max-w-full px-3 flex-0">
                 <!-- Navbar -->
                 <nav
-                    class="absolute top-0 left-0 right-0 z-30 flex flex-wrap items-center px-4 py-2 m-6 mb-0 shadow-sm rounded-xl bg-white/80 backdrop-blur-2xl backdrop-saturate-200 lg:flex-nowrap lg:justify-start"
+                    class="absolute top-0 left-0 right-0 z-30 flex flex-wrap items-center px-4 py-2 m-6 mb-0 shadow-sm rounded-xl bg-white/80 backdrop-blur-2xl backdrop-saturate-200 lg:flex-nowrap lg:justify-start dark:bg-slate-850/80 dark:shadow-dark-xl "
                 >
                     <div
                         class="flex items-center justify-between w-full p-0 px-6 mx-auto flex-wrap-inherit"
                     >
                         <a
-                            class="py-1.75 text-sm mr-4 ml-4 whitespace-nowrap font-bold text-slate-700 lg:ml-0"
+                            class="py-1.75 text-sm mr-4 ml-4 whitespace-nowrap font-bold text-slate-700 lg:ml-0 dark:text-slate-200"
                             href="https://demos.creative-tim.com/argon-dashboard-tailwind/pages/dashboard.html"
                             target="_blank"
                         >
@@ -57,7 +61,7 @@ const year = new Date().getFullYear();
                             >
                                 <li>
                                     <a
-                                        class="flex items-center px-4 py-2 mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-sm text-slate-700 lg:px-2"
+                                        class="flex items-center px-4 py-2 mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-sm text-slate-700 lg:px-2 dark:text-slate-200"
                                         aria-current="page"
                                         href="../pages/dashboard.html"
                                     >
@@ -69,7 +73,7 @@ const year = new Date().getFullYear();
                                 </li>
                                 <li>
                                     <a
-                                        class="block px-4 py-2 mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-sm text-slate-700 lg:px-2"
+                                        class="block px-4 py-2 mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-sm text-slate-700 lg:px-2 dark:text-slate-200"
                                         href="../pages/profile.html"
                                     >
                                         <i
@@ -80,7 +84,7 @@ const year = new Date().getFullYear();
                                 </li>
                                 <li>
                                     <Link
-                                        class="block px-4 py-2 mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-sm text-slate-700 lg:px-2"
+                                        class="block px-4 py-2 mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-sm text-slate-700 lg:px-2 dark:text-slate-200"
                                         :href="route('register')"
                                     >
                                         <i
@@ -91,7 +95,7 @@ const year = new Date().getFullYear();
                                 </li>
                                 <li>
                                     <Link
-                                        class="block px-4 py-2 mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-sm text-slate-700 lg:px-2"
+                                        class="block px-4 py-2 mr-2 font-normal transition-all ease-in-out lg-max:opacity-0 duration-250 text-sm text-slate-700 lg:px-2 dark:text-slate-200"
                                         :href="route('login')"
                                     >
                                         <i
@@ -129,10 +133,10 @@ const year = new Date().getFullYear();
         </div>
     </div>
     <!-- Main -->
-    <main class="mt-0 transition-all duration-200 ease-in-out">
+    <main class="mt-0 transition-all duration-200 ease-in-out dark:bg-slate-850 dark:shadow-dark-xl">
         <section>
             <div
-                class="relative flex items-center min-h-screen p-0 overflow-hidden bg-center bg-cover"
+                class="relative flex items-center min-h-screen p-0 overflow-hidden bg-center bg-cover "
             >
                 <div class="container z-1">
                     <div class="flex flex-wrap -mx-3">
@@ -166,7 +170,7 @@ const year = new Date().getFullYear();
             </div>
         </section>
     </main>
-    <footer class="py-12">
+    <footer class="py-12 dark:bg-slate-850 dark:shadow-dark-xl">
         <div class="container">
             <div class="flex flex-wrap -mx-3">
                 <div
