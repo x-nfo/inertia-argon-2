@@ -1,23 +1,28 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
-import ApplicationLogo from '@/Components/ApplicationLogo.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
-import DashboardAside from '@/Components/DashboardAside.vue';
-import DashboardNavbar from '@/Components/DashboardNavbar.vue';
+    import { ref } from 'vue';
+    import ApplicationLogo from '@/Components/ApplicationLogo.vue';
+    import Dropdown from '@/Components/Dropdown.vue';
+    import DropdownLink from '@/Components/DropdownLink.vue';
+    import NavLink from '@/Components/NavLink.vue';
+    import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+    import { Link } from '@inertiajs/vue3';
+    import DashboardAside from '@/Components/DashboardAside.vue';
+    import DashboardNavbar from '@/Components/DashboardNavbar.vue';
+    import DashboardConfig from '@/Components/DashboardConfig.vue';
 
-const isSidenavActive = ref(false);
+    const isDashboardConfigActive = ref( false )
 
-const handleToggleSidenav = () => {
-    isSidenavActive.value = !isSidenavActive.value;
-};
+    const handleToggleDashboardConfig = () =>
+    {
+        isDashboardConfigActive.value = !isDashboardConfigActive.value
+    }
 
-watchEffect(() => {
-    console.log('From AutLayout' + ' ' + isSidenavActive.value);
-});
+
+
+
+
+
+
 </script>
 
 <template>
@@ -35,4 +40,8 @@ watchEffect(() => {
         />
         <slot />
     </main>
+
+    <DashboardConfig :isDashboardConfigActive @dashboardConfigTrigger="handleToggleDashboardConfig">
+
+    </DashboardConfig>
 </template>
