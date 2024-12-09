@@ -9,6 +9,10 @@
     import DashboardAside from '@/Components/DashboardAside.vue';
     import DashboardNavbar from '@/Components/DashboardNavbar.vue';
     import DashboardConfig from '@/Components/DashboardConfig.vue';
+    import ArgonSwitchButton from '@/Components/ArgonSwitchButton.vue';
+    import { useDark, useToggle } from '@vueuse/core'
+
+
 
     const isDashboardConfigActive = ref( false )
 
@@ -16,6 +20,10 @@
     {
         isDashboardConfigActive.value = !isDashboardConfigActive.value
     }
+
+    //Dark Mode
+    const isDark = useDark()
+    const toggleDark = useToggle(isDark)
 
 
 
@@ -42,6 +50,11 @@
     </main>
 
     <DashboardConfig :isDashboardConfigActive @dashboardConfigTrigger="handleToggleDashboardConfig">
+
+        <template #darkmode>
+
+            <ArgonSwitchButton name="darkmode" v-model:checked="isDark" @click="toggleDark"/>
+        </template>
 
     </DashboardConfig>
 </template>
