@@ -1,9 +1,50 @@
-<script setup></script>
+<script setup>
+import { computed } from 'vue';
+
+
+    const props = defineProps( {
+        isNavbarFixed: {type: Boolean, default: false}
+    } )
+
+    const navbarFixedClasses = computed( () =>
+    {
+
+        if ( props.isNavbarFixed == true)
+        {
+            return {
+                navbarContainer: 'sticky top-[1%] backdrop-saturate-200 backdrop-blur-2xl dark:bg-slate-850/80 dark:shadow-dark-blur bg-[hsla(0,0%,100%,0.8)] shadow-blur z-110',
+                navbarBreadcrumbs: 'dark:text-white dark:before:text-white',
+                navbarText: 'dark:text-white',
+                sidenavTrigger: 'dark:bg-white bg-slate-500 '
+            }
+
+        } else
+        {
+            return {
+                navbarContainer: 'relative shadow-none',
+                navbarBreadcrumbs: 'text-white before:text-white',
+                navbarText: 'text-white',
+                sidenavTrigger: 'bg-white'
+            }
+        }
+    })
+
+
+
+
+
+
+
+
+
+</script>
 
 <template>
     <!-- Navbar -->
+
     <nav
-        class="relative flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all ease-in shadow-none duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
+        class=" flex flex-wrap items-center justify-between px-0 py-2 mx-6 transition-all ease-in  duration-250 rounded-2xl lg:flex-nowrap lg:justify-start"
+        :class="navbarFixedClasses.navbarContainer"
         navbar-main
         navbar-scroll="false"
     >
@@ -16,18 +57,28 @@
                     class="flex flex-wrap pt-1 mr-12 bg-transparent rounded-lg sm:mr-16"
                 >
                     <li class="text-sm leading-normal">
-                        <a class="text-white opacity-50" href="javascript:;"
+                        <a
+                            class="opacity-50"
+                            :class="navbarFixedClasses.navbarText"
+                            href="javascript:;"
+
                             >Pages</a
                         >
                     </li>
                     <li
-                        class="text-sm pl-2 capitalize leading-normal text-white before:float-left before:pr-2 before:text-white before:content-['/']"
+                        class="text-sm pl-2 capitalize leading-normal before:float-left before:pr-2 before:content-['/']"
+                        :class="navbarFixedClasses.navbarBreadcrumbs"
                         aria-current="page"
                     >
                         Dashboard
                     </li>
                 </ol>
-                <h6 class="mb-0 font-bold text-white capitalize">Dashboard</h6>
+                <h6
+                    class="mb-0 font-bold capitalize"
+                    :class="navbarFixedClasses.navbarText"
+                >
+                    Dashboard
+                </h6>
             </nav>
 
             <div
@@ -59,7 +110,8 @@
                     <li class="flex items-center">
                         <a
                             href="../pages/sign-in.html"
-                            class="block px-0 py-2 text-sm font-semibold text-white transition-all ease-nav-brand"
+                            class="block px-0 py-2 text-sm font-semibold transition-all ease-nav-brand"
+                            :class="navbarFixedClasses.navbarText"
                         >
                             <i class="fa fa-user sm:mr-1"></i>
                             <span class="hidden sm:inline">Sign In</span>
@@ -68,18 +120,22 @@
                     <li class="flex items-center pl-4 xl:hidden">
                         <a
                             href="javascript:;"
-                            class="block p-0 text-sm text-white transition-all ease-nav-brand"
+                            class="block p-0 text-sm  transition-all ease-nav-brand"
+                            :class="navbarFixedClasses.navbarText"
                             sidenav-trigger
                         >
                             <div class="w-4.5 overflow-hidden">
                                 <i
-                                    class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"
+                                    class="ease mb-0.75 relative block h-0.5 rounded-sm  transition-all"
+                                    :class="navbarFixedClasses.sidenavTrigger"
                                 ></i>
                                 <i
-                                    class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"
+                                    class="ease mb-0.75 relative block h-0.5 rounded-sm  transition-all"
+                                    :class="navbarFixedClasses.sidenavTrigger"
                                 ></i>
                                 <i
-                                    class="ease relative block h-0.5 rounded-sm bg-white transition-all"
+                                    class="ease relative block h-0.5 rounded-sm  transition-all"
+                                    :class="navbarFixedClasses.sidenavTrigger"
                                 ></i>
                             </div>
                         </a>
@@ -87,7 +143,8 @@
                     <li class="flex items-center px-4">
                         <a
                             href="javascript:;"
-                            class="p-0 text-sm text-white transition-all ease-nav-brand"
+                            class="p-0 text-sm  transition-all ease-nav-brand"
+                            :class="navbarFixedClasses.navbarText"
                         >
                             <i
                                 fixed-plugin-button-nav
@@ -103,7 +160,8 @@
                         <p class="hidden transform-dropdown-show"></p>
                         <a
                             href="javascript:;"
-                            class="block p-0 text-sm text-white transition-all ease-nav-brand"
+                            class="block p-0 text-sm transition-all ease-nav-brand"
+                            :class="navbarFixedClasses.navbarText"
                             dropdown-trigger
                             aria-expanded="false"
                         >

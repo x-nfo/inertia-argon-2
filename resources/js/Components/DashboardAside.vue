@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import NavLink from './NavLink.vue';
+</script>
 
 <template>
     <!-- sidenav  -->
@@ -42,9 +44,9 @@
         >
             <ul class="flex flex-col pl-0 mb-0">
                 <li class="mt-0.5 w-full">
-                    <a
-                        class="py-2.7 bg-blue-500/13 dark:text-white dark:opacity-80 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap rounded-lg px-4 font-semibold text-slate-700 transition-colors"
-                        href="../pages/dashboard.html"
+                    <NavLink
+                        :active="route().current('dashboard')"
+                        :href="route('dashboard')"
                     >
                         <div
                             class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5"
@@ -57,7 +59,7 @@
                             class="ml-1 duration-300 opacity-100 pointer-events-none ease"
                             >Dashboard</span
                         >
-                    </a>
+                    </NavLink>
                 </li>
 
                 <li class="mt-0.5 w-full">
@@ -145,9 +147,9 @@
                 </li>
 
                 <li class="mt-0.5 w-full">
-                    <a
-                        class="dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors"
-                        href="../pages/profile.html"
+                    <NavLink
+                        :active="route().current('profile.edit')"
+                        :href="route('profile.edit')"
                     >
                         <div
                             class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5"
@@ -160,7 +162,7 @@
                             class="ml-1 duration-300 opacity-100 pointer-events-none ease"
                             >Profile</span
                         >
-                    </a>
+                    </NavLink>
                 </li>
 
                 <li class="mt-0.5 w-full">

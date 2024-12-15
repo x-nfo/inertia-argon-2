@@ -21,10 +21,8 @@
             rel="stylesheet"
         />
         <!-- Font Awesome Icons -->
-        <script
-            src="https://kit.fontawesome.com/42d5adcbca.js"
-            crossorigin="anonymous"
-        ></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         <!-- Nucleo Icons -->
         <link href="{{ asset('../assets/css/nucleo-icons.css') }}" rel="stylesheet" />
         <link href="{{ asset('../assets/css/nucleo-svg.css') }}" rel="stylesheet" />
@@ -46,7 +44,7 @@
     <body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
     @else
     <body class="m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500">
-        
+
     @endauth
         @inertia
     </body>
