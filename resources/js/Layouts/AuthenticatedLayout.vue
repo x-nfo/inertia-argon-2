@@ -11,6 +11,7 @@
     import DashboardConfig from '@/Components/DashboardConfig.vue';
     import ArgonSwitchButton from '@/Components/ArgonSwitchButton.vue';
     import { useDark, useToggle } from '@vueuse/core'
+    import ArgonTransparentButton from '@/Components/ArgonTransparentButton.vue';
 
 
 
@@ -35,6 +36,19 @@
         localStorage.setItem('navbar-fixed-status', JSON.stringify(newValue))
     } )
 
+    //Sidenav Type
+    const isSidenavDark = ref( false )
+    const toggleSidenavType = () => isSidenavDark.value = !isSidenavDark.value
+
+    watch( isSidenavDark, ( newValue ) =>
+    {
+        localStorage.setItem('sidenav-type-status', JSON.stringify(newValue))
+    } )
+
+
+
+
+
 
     onMounted( () =>
     {
@@ -43,6 +57,14 @@
         if ( navbarFixedStatus !== null )
         {
             isNavbarFixed.value = JSON.parse(navbarFixedStatus)
+        }
+
+
+        const sidenavTypeStatus = localStorage.getItem( 'sidenav-type-status' )
+
+        if ( sidenavTypeStatus !== null )
+        {
+            isSidenavDark.value = JSON.parse(sidenavTypeStatus)
         }
     })
 
@@ -59,7 +81,7 @@
 <template>
     <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
 
-    <DashboardAside />
+    <DashboardAside :isSidenavDark  />
 
     <!-- Page Content -->
     <main
@@ -72,13 +94,22 @@
 
     <DashboardConfig :isDashboardConfigActive @dashboardConfigTrigger="handleToggleDashboardConfig">
 
-        <template #navbarfixed>
+        <template #sidenavType>
+
+           <ArgonTransparentButton :active="!isSidenavDark" text="White" @click="toggleSidenavType" />
+
+           <ArgonTransparentButton :active="isSidenavDark" text="Dark" @click="toggleSidenavType" />
+
+
+        </template>
+
+        <template #navbarFixed>
 
             <ArgonSwitchButton name="navbarfixed" v-model:checked="isNavbarFixed" @click="toggleNavbarFixed"/>
 
         </template>
 
-        <template #darkmode>
+        <template #darkMode>
 
             <ArgonSwitchButton name="darkmode" v-model:checked="isDark" @click="toggleDark"/>
         </template>
