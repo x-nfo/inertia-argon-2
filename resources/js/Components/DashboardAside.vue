@@ -3,7 +3,8 @@
 import NavLink from './NavLink.vue';
 
     const props = defineProps( {
-        isSidenavDark: {type:Boolean, default:false}
+        isSidenavDark: { type: Boolean, default: false },
+        selectedColor: {type:String}
     } )
 
     const sidenavTypeClasses = computed(() => props.isSidenavDark ? 'ps bg-slate-850 shadow-none dark' : 'bg-white shadow-xl ')
@@ -57,6 +58,7 @@ import NavLink from './NavLink.vue';
                     <NavLink
                         :active="route().current('dashboard')"
                         :href="route('dashboard')"
+                        :bgColor="props.selectedColor"
                     >
                         <div
                             class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5"
@@ -160,6 +162,7 @@ import NavLink from './NavLink.vue';
                     <NavLink
                         :active="route().current('profile.edit')"
                         :href="route('profile.edit')"
+                        :bg-color="props.selectedColor"
                     >
                         <div
                             class="mr-2 flex h-8 w-8 items-center justify-center rounded-lg bg-center stroke-0 text-center xl:p-2.5"

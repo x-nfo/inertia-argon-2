@@ -12,6 +12,7 @@
     import ArgonSwitchButton from '@/Components/ArgonSwitchButton.vue';
     import { useDark, useToggle } from '@vueuse/core'
     import ArgonTransparentButton from '@/Components/ArgonTransparentButton.vue';
+    import ArgonSidebarColors from '@/Components/ArgonSidebarColors.vue';
 
 
 
@@ -46,6 +47,30 @@
     } )
 
 
+    //Sidebar Colors
+    const selectedColor = ref( 'bg-blue-500/13' );
+
+    const sidebarColors = [
+        ['bg-blue-500/30', {from:'blue-500', to:'violet-500'}],
+        ['bg-gray-500/30', {from:'zinc-800', to:'zinc-700'}],
+        ['bg-cyan-500/30', {from:'blue-700', to:'cyan-500'}],
+        ['bg-emerald-500/30', {from:'emerald-500', to:'teal-400'}],
+        ['bg-orange-500/30', {from:'orange-500', to:'yellow-500'}],
+        ['bg-red-500/30', {from:'red-600', to:'orange-600'}],
+    ]
+
+
+    const setSidebarColor = ( color ) => selectedColor.value = color
+
+    watch( selectedColor, ( newColor ) =>
+    {
+        localStorage.setItem('selected-sidebar-color', newColor)
+    })
+
+
+
+
+
 
 
 
@@ -66,6 +91,14 @@
         {
             isSidenavDark.value = JSON.parse(sidenavTypeStatus)
         }
+
+
+        const selectedSidebarColor = localStorage.getItem( 'selected-sidebar-color' )
+
+        if ( selectedSidebarColor !== null )
+        {
+            selectedColor.value = selectedSidebarColor
+        }
     })
 
 
@@ -81,7 +114,7 @@
 <template>
     <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
 
-    <DashboardAside :isSidenavDark  />
+    <DashboardAside :isSidenavDark :selectedColor />
 
     <!-- Page Content -->
     <main
@@ -93,6 +126,11 @@
     </main>
 
     <DashboardConfig :isDashboardConfigActive @dashboardConfigTrigger="handleToggleDashboardConfig">
+
+        <template #sidebarColors>
+
+            <ArgonSidebarColors v-for="([color, shades], index)  in sidebarColors" :key="index" :from="shades.from" :to="shades.to" :isActive="selectedColor === color"  @click="setSidebarColor(color)"/>
+        </template>
 
         <template #sidenavType>
 

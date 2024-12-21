@@ -10,11 +10,14 @@ const props = defineProps({
     active: {
         type: Boolean,
     },
+    bgColor: {
+        type: String
+    }
 });
 
 const classes = computed(() =>
     props.active
-        ? 'dark:text-white bg-blue-500/13 dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors'
+        ? ` ${props.bgColor} dark:text-white bg-blue-500/13 dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors rounded-lg`
         : 'dark:text-white dark:opacity-80 py-2.7 text-sm ease-nav-brand my-0 mx-2 flex items-center whitespace-nowrap px-4 transition-colors'
 );
 </script>
