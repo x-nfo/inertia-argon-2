@@ -40,12 +40,8 @@
         @inertiaHead
     </head>
 
-    @auth
     <body class="m-0 font-sans text-base antialiased font-normal dark:bg-slate-900 leading-default bg-gray-50 text-slate-500">
-    @else
-    <body class="m-0 font-sans antialiased font-normal bg-white text-start text-base leading-default text-slate-500">
 
-    @endauth
         @inertia
     </body>
     <!-- plugin for scrollbar  -->
