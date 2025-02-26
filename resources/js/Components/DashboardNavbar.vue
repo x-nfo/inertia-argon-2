@@ -3,8 +3,11 @@ import { computed } from 'vue';
 
 
     const props = defineProps( {
-        isNavbarFixed: {type: Boolean, default: false}
+        isNavbarFixed: { type: Boolean, default: false },
+        isMobileSidenavActive: {type: Boolean}
     } )
+
+    const emit = defineEmits(['mobileSidenavTrigger', 'toggleConfig'])
 
     const navbarFixedClasses = computed( () =>
     {
@@ -27,7 +30,9 @@ import { computed } from 'vue';
                 sidenavTrigger: 'bg-white'
             }
         }
-    })
+    } )
+
+    const mobileSidenavActive = computed(() => props.isMobileSidenavActive ? ' translate-x-[5px]' : '' )
 
 
 
@@ -119,30 +124,34 @@ import { computed } from 'vue';
                     </li>
                     <li class="flex items-center pl-4 xl:hidden">
                         <a
-                            href="javascript:;"
+                            @click="emit('mobileSidenavTrigger')"
+                            href="#"
                             class="block p-0 text-sm  transition-all ease-nav-brand"
                             :class="navbarFixedClasses.navbarText"
-                            sidenav-trigger
+
                         >
                             <div class="w-4.5 overflow-hidden">
                                 <i
-                                    class="ease mb-0.75 relative block h-0.5 rounded-sm  transition-all"
-                                    :class="navbarFixedClasses.sidenavTrigger"
+
+                                    :class="[navbarFixedClasses.sidenavTrigger, mobileSidenavActive]"
+                                    class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"
                                 ></i>
                                 <i
                                     class="ease mb-0.75 relative block h-0.5 rounded-sm  transition-all"
                                     :class="navbarFixedClasses.sidenavTrigger"
                                 ></i>
                                 <i
-                                    class="ease relative block h-0.5 rounded-sm  transition-all"
-                                    :class="navbarFixedClasses.sidenavTrigger"
+
+                                    :class="[navbarFixedClasses.sidenavTrigger, mobileSidenavActive]"
+                                    class="ease mb-0.75 relative block h-0.5 rounded-sm bg-white transition-all"
                                 ></i>
                             </div>
                         </a>
                     </li>
                     <li class="flex items-center px-4">
                         <a
-                            href="javascript:;"
+                            @click="emit('toggleConfig')"
+                            href="#"
                             class="p-0 text-sm  transition-all ease-nav-brand"
                             :class="navbarFixedClasses.navbarText"
                         >

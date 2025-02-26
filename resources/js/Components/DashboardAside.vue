@@ -4,10 +4,15 @@ import NavLink from './NavLink.vue';
 
     const props = defineProps( {
         isSidenavDark: { type: Boolean, default: false },
-        selectedColor: {type:String}
+        selectedColor: { type: String },
+        isMobileSidenavActive: {type: Boolean, default: false}
     } )
 
+    const emit = defineEmits(['mobileSidenavTrigger'])
+
     const sidenavTypeClasses = computed(() => props.isSidenavDark ? 'ps bg-slate-850 shadow-none dark' : 'bg-white shadow-xl ')
+
+    const mobileSidenavClasses = computed(() => props.isMobileSidenavActive ? 'bg-white ps translate-x-0 ml-6' : '')
 
 
 </script>
@@ -15,12 +20,14 @@ import NavLink from './NavLink.vue';
 <template>
     <!-- sidenav  -->
     <aside
-        :class="sidenavTypeClasses"
+
+        :class="[sidenavTypeClasses, mobileSidenavClasses]"
         class="fixed inset-y-0 flex-wrap items-center justify-between block w-full p-0 my-4 overflow-y-auto antialiased transition-transform duration-200 -translate-x-full  border-0 dark:shadow-none dark:bg-slate-850 max-w-64 ease-nav-brand z-990 xl:ml-6 rounded-2xl xl:left-0 xl:translate-x-0"
-        aria-expanded="false"
+
     >
         <div class="h-19">
             <i
+                @click="emit('mobileSidenavTrigger')"
                 class="absolute top-0 right-0 p-4 opacity-50 cursor-pointer fas fa-times dark:text-white text-slate-400 xl:hidden"
                 sidenav-close
             ></i>

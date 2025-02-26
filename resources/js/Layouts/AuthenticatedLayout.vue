@@ -1,5 +1,5 @@
 <script setup>
-    import { onMounted, ref, watch } from 'vue';
+    import { onMounted, onUpdated, ref, watch } from 'vue';
     import ApplicationLogo from '@/Components/ApplicationLogo.vue';
     import Dropdown from '@/Components/Dropdown.vue';
     import DropdownLink from '@/Components/DropdownLink.vue';
@@ -13,6 +13,15 @@
     import { useDark, useToggle } from '@vueuse/core'
     import ArgonTransparentButton from '@/Components/ArgonTransparentButton.vue';
     import ArgonSidebarColors from '@/Components/ArgonSidebarColors.vue';
+
+
+    const isMobileSidenavActive = ref( false )
+
+    const toggleMobileSidenav = () =>
+    {
+        isMobileSidenavActive.value = !isMobileSidenavActive.value
+    }
+
 
 
 
@@ -65,14 +74,7 @@
     watch( selectedColor, ( newColor ) =>
     {
         localStorage.setItem('selected-sidebar-color', newColor)
-    })
-
-
-
-
-
-
-
+    } )
 
 
     onMounted( () =>
@@ -101,55 +103,83 @@
         }
     })
 
-
-
-
-
-
-
-
-
 </script>
 
 <template>
     <div class="absolute w-full bg-blue-500 dark:hidden min-h-75"></div>
 
-    <DashboardAside :isSidenavDark :selectedColor />
+    <DashboardAside
+        :isSidenavDark
+        :selectedColor
+        :isMobileSidenavActive
+        @mobileSidenavTrigger="toggleMobileSidenav"
+    />
 
     <!-- Page Content -->
     <main
         class="relative h-full max-h-screen transition-all duration-200 ease-in-out xl:ml-68 rounded-xl"
     >
-        <DashboardNavbar :isNavbarFixed/>
+        <DashboardNavbar
+            :isNavbarFixed
+            :isMobileSidenavActive
+            @mobileSidenavTrigger="toggleMobileSidenav"
+            @toggleConfig="handleToggleDashboardConfig"
+        />
 
         <slot />
     </main>
 
-    <DashboardConfig :isDashboardConfigActive @dashboardConfigTrigger="handleToggleDashboardConfig">
+    <DashboardConfig
+        :isDashboardConfigActive
+        @dashboardConfigTrigger="handleToggleDashboardConfig"
+    >
 
         <template #sidebarColors>
 
-            <ArgonSidebarColors v-for="([color, shades], index)  in sidebarColors" :key="index" :from="shades.from" :to="shades.to" :isActive="selectedColor === color"  @click="setSidebarColor(color)"/>
+            <ArgonSidebarColors
+                v-for="([color, shades], index)  in sidebarColors"
+                :key="index"
+                :from="shades.from"
+                :to="shades.to"
+                :isActive="selectedColor === color"
+                @click="setSidebarColor(color)"
+            />
         </template>
 
         <template #sidenavType>
 
-           <ArgonTransparentButton :active="!isSidenavDark" text="White" @click="toggleSidenavType" />
+           <ArgonTransparentButton
+                :active="!isSidenavDark"
+                text="White"
+                @click="toggleSidenavType"
+            />
 
-           <ArgonTransparentButton :active="isSidenavDark" text="Dark" @click="toggleSidenavType" />
+           <ArgonTransparentButton
+                :active="isSidenavDark"
+                text="Dark"
+                @click="toggleSidenavType"
+            />
 
 
         </template>
 
         <template #navbarFixed>
 
-            <ArgonSwitchButton name="navbarfixed" v-model:checked="isNavbarFixed" @click="toggleNavbarFixed"/>
+            <ArgonSwitchButton
+                name="navbarfixed"
+                v-model:checked="isNavbarFixed"
+                @click="toggleNavbarFixed"
+            />
 
         </template>
 
         <template #darkMode>
 
-            <ArgonSwitchButton name="darkmode" v-model:checked="isDark" @click="toggleDark"/>
+            <ArgonSwitchButton
+                name="darkmode"
+                v-model:checked="isDark"
+                @click="toggleDark"
+            />
         </template>
 
     </DashboardConfig>
